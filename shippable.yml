@@ -3,6 +3,10 @@ rvm:
   - 1.9.2
 env:
   - CI_REPORTS=shippable/testresults COVERAGE_REPORTS=shippable/codecoverage
+services:
+  - redis 
+before_install:  
+  - psql -c 'create database reveal_test;' -U postgres
 notifications:
   email: 
     - manisha@shippable.com
