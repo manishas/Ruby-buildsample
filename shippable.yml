@@ -1,12 +1,17 @@
 language: ruby
 rvm:
-  - 1.9.2
+  - 2.0.0-p247
 env:
   - CI_REPORTS=shippable/testresults COVERAGE_REPORTS=shippable/codecoverage
-services:
-  - redis 
-before_install:  
-  - psql -c 'create database reveal_test;' -U postgres
+#services:
+#  - redis 
+before_script:
+  - psql -c 'create database joiz_de_report_test;' -U postgres
+  - cp config/database.shippable.yml config/database.yml
+  - rake db:migrate
+#before_install:  
+#  - psql -c 'create database reveal_test;' -U postgres
 notifications:
   email: 
     - manisha@shippable.com
+
